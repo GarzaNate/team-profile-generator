@@ -29,5 +29,5 @@ describe("newEmployee", () => {
         const e = new Employee("bob", 1, "test@test.com");
         expect(e.getRole()).toBe(testValue);
     });
-})
+});
 

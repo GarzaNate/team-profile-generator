@@ -1,43 +1,44 @@
 // node modules
-const inquirer = require('inquirer');
-const fs = require('fs');
+const inquirer = require("inquirer");
+const fs = require("fs");
 
 // lib modules
-const Manager = require('./lib/Manager');
-const Intern = require('./lib/Intern');
-const Engineer = require('./lib/Engineer');
+const Manager = require("./lib/Manager");
+const Intern = require("./lib/Intern");
+const Engineer = require("./lib/Engineer");
 
 // array for members answers
-const teamMemnber = []
+const teamMemberData = []
 
+// asysnc function for questions based on role
 const questions = async () => {
     // basic questions to determine role
     const answers = await inquirer
         .prompt([
             {
-                type: imput,
+                type: "input",
                 message: "What is your name?",
-                name: name,
+                name: "name",
             },
 
             {
-                type: imput,
+                type: "input",
                 message: "What is your id number?",
-                name: id,
+                name: "id",
             },
 
             {
-                type: imput,
+                type: "input",
                 message: "What is your email?",
-                name: email,
+                name: "email",
             },
 
             {
-                type: list,
+                type: "list",
                 message: "What is your role?",
-                name: role,
-                choices: ['Engineer', 'Intern', 'Manager'],
-                validate: (value) => { if (value) { return true } else { return 'Please select a role.' } },
+                name: "role",
+                choices: ["Engineer", "Intern", "Manager"],
+                validate: (value) => { if (value) { return true } else { return "Please select a role." } },
             },
         ])
 
@@ -46,7 +47,7 @@ const questions = async () => {
             const officeAns = await inquirer
                 .prompt([
                     {
-                        type: input,
+                        type: "input",
                         message: "What is your office number?",
                         name: "officeNumber",
                     }
@@ -66,7 +67,7 @@ const questions = async () => {
             const githubAns = await inquirer
                 .prompt([
                     {
-                        type: input,
+                        type: "input",
                         message: "What is your github username?",
                         name: "github",
                     }
@@ -86,7 +87,7 @@ const questions = async () => {
             const schoolAns = await inquirer
                 .prompt([
                     {
-                        type: input,
+                        type: "input",
                         message: "What school did you attend?",
                         name: "school"
                     }
@@ -103,4 +104,34 @@ const questions = async () => {
         }
 };
 
+// function to add member / create team
+async function promptQuestions() {
+    await questions();
 
+    const addMember = await inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "What would you like to do next?",
+                name: "newMember",
+                choices: ["Add another member?", "Create Team"],
+            }
+        ]);
+
+        if(addMember.newMember === "Add another member") {
+            return promptQuestions();
+        }
+        return createTeam()
+};
+
+promptQuestions();
+
+// function to create team
+function createTeam() {
+    console.log("New Team", teamMemberData);
+    fs.writeFileSync("./output/index.html",
+    // need a generate team function
+    // function(teamMemberData),
+    "utf-8"
+    );
+};
