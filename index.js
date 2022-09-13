@@ -1,6 +1,8 @@
 // node modules
 const inquirer = require("inquirer");
 const fs = require("fs");
+// import inquirer from "inquirer";
+// import fs from "fs";
 
 // lib modules
 const Manager = require("./lib/Manager");
@@ -129,9 +131,12 @@ promptQuestions();
 // function to create team
 function createTeam() {
     console.log("New Team", teamMemberData);
-    fs.writeFileSync("./output/index.html",
-    // need a generate team function
-    // function(teamMemberData),
+    fs.writeFile("./dist/index.html",
+    generateHTML(teamMemberData),
     "utf-8"
     );
 };
+function generateHTML(data){
+    return `
+    `
+}
