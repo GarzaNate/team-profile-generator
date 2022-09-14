@@ -167,9 +167,9 @@ function generateHTML(data) {
             </div>
             <div class="card-body">
                 <ul class="list-group">
-                    <li class="list-group-item">${element.name}</li>
-                    <li class="list-group-item">${element.id}</li>
-                    <li class="list-group-item">${element.email}</li>
+                    <li class="list-group-item">Name: ${element.name}</li>
+                    <li class="list-group-item">Employee Id: ${element.id}</li>
+                    <li class="list-group-item">Email: ${element.email}</li>
                     <li class="list-group-item">${uniqueDataPoint}</li>
                 </ul>
             </div>
